@@ -1,34 +1,26 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import SEO from "../components/Seo"
+import 'bootstrap/dist/css/bootstrap.css';
+import { PrimaryButton, SecondaryButton } from '../components/Buttons'
+import i18n from '../i18n';
+import { withTranslation } from 'react-i18next';
 
-const Header = ({ siteTitle }) => (
-  <header
-    // style={{
-    //   background: `rebeccapurple`,
-    //   marginBottom: `1.45rem`,
-    // }}
-  >
-    header
-    {/* <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div> */}
+const Header = ({ siteTitle, t }) => (
+  <header>
+    <SEO title="Home" />
+    <Link to="/flowchart">
+      <PrimaryButton>{t('eligible')}</PrimaryButton>
+    </Link>
+    <Link to="/calculator">
+      <PrimaryButton>I'm eligible (Calculator)</PrimaryButton>
+    </Link>
+    <Link to="/resources">
+      <PrimaryButton>Resources</PrimaryButton>
+    </Link>
+    <SecondaryButton onClick={() => i18n.changeLanguage('en')}>English</SecondaryButton>
+    <SecondaryButton onClick={() => i18n.changeLanguage('es')}>Espanol</SecondaryButton>
   </header>
 )
 
@@ -40,4 +32,4 @@ Header.defaultProps = {
   siteTitle: `Rent Cap`,
 }
 
-export default Header
+export default withTranslation()(Header)

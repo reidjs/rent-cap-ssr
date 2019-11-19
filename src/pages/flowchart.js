@@ -1,4 +1,5 @@
 import React from 'react'
+import Layout from '../components/Layout'
 
 class FlowChart extends React.Component {
   constructor(props) {
@@ -6,7 +7,9 @@ class FlowChart extends React.Component {
   }
   render() {
     return (
-      <h1>Flowchart</h1>
+      <Layout>
+        <h1>Flowchart</h1>
+      </Layout>
     )
   }
 }

@@ -63,7 +63,7 @@ class Calculator extends React.Component {
   }
   
   render() {
-    const { t, refund, changeRefund, zip } = this.props
+    const { t, refund, changeRefund } = this.props
     const maxRent = this.calculateMaxRent();
     const rentIncreasePercentage = this.calculateRentIncreasePercentage();
     const updateRefund = () => {
@@ -93,68 +93,65 @@ class Calculator extends React.Component {
     })
     return (
       <Layout>
-        <div>
-          refund {refund}
-          <h1>{t('calculator-title')}</h1>
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Where do you live?</h5>
-              <select data-toggle="dropdown" onChange={(e) => this.handleInput('cpi', e)}>
-                <option value="0.033" label="Select your location"></option>
-                <option value="0.04" label="Oakland-Hayward-San Francisco"></option>
-                <option value="0.033" label="Los Angeles-Long Beach-Anaheim"></option>
-                <option value="0.022" label="San Diego-Carlsbad"></option>
-                <option value="0.028" label="Riverside-San Bernardino-Ontario"></option>
-                <option value="0.033" label="Other"></option>
-              </select>
-            </div>
+        <h1>{t('calculator-title')}</h1>
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">Where do you live?</h5>
+            <select data-toggle="dropdown" onChange={(e) => this.handleInput('cpi', e)}>
+              <option value="0.033" label="Select your location"></option>
+              <option value="0.04" label="Oakland-Hayward-San Francisco"></option>
+              <option value="0.033" label="Los Angeles-Long Beach-Anaheim"></option>
+              <option value="0.022" label="San Diego-Carlsbad"></option>
+              <option value="0.028" label="Riverside-San Bernardino-Ontario"></option>
+              <option value="0.033" label="Other"></option>
+            </select>
           </div>
-          <br />
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">What was your rent on March 15, 2019?</h5>
-              <input type='number' value={this.state.pastRent} onChange={(e) => this.handleInput('pastRent', e)}></input>
-            </div>
-          </div>
-          <br />
-          <h4>Your maximum rent should be <strong>${maxRent}</strong></h4>
-          <Disclaimer />
-          <br />
-          <br />
-          <PrimaryButton onClick={() => this.setState({showSection: true})}>Was I overcharged?</PrimaryButton>
-          <br />
-          {this.state.showSection &&
-            <section>
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">What is your current rent?</h5>
-                  <input type='number' value={this.state.currentRent} onChange={(e) => this.handleInput('currentRent', e)}></input>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">Did your rent increase within the year (between March 15th and now)?</h5>
-                  <SecondaryButton onClick={() => this.setState({showRentIncrease: true})}>Yes</SecondaryButton><SecondaryButton onClick={() => this.setState({showRentIncrease: false})}>No</SecondaryButton>
-                  {this.state.showRentIncrease &&
-                    <section className="rent-increases">
-                      <ul>{rentIncreases}</ul>
-                      <SuccessButton className="add" onClick={this.addRentIncrease}>+</SuccessButton>
-                    </section>
-                  }
-                </div>
-              </div>
-              <br />
-              <h4>Your rent increased by {rentIncreasePercentage}%. Your maximum rent is {maxRent} and you should be refunded ${refund}</h4>
-              <Disclaimer />
-              <br />
-              <br />
-              <PrimaryButton onClick={() => this.setState({showLetter: true})}>Generate a letter to your landlord</PrimaryButton>
-            </section>
-          }
-          {this.state.showLetter &&
-            <GenerateLetter/>
-          }
         </div>
+        <br />
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">What was your rent on March 15, 2019?</h5>
+            <input type='number' value={this.state.pastRent} onChange={(e) => this.handleInput('pastRent', e)}></input>
+          </div>
+        </div>
+        <br />
+        <h4>Your maximum rent should be <strong>${maxRent}</strong></h4>
+        <Disclaimer />
+        <br />
+        <br />
+        <PrimaryButton onClick={() => this.setState({showSection: true})}>Was I overcharged?</PrimaryButton>
+        <br />
+        {this.state.showSection &&
+          <section>
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">What is your current rent?</h5>
+                <input type='number' value={this.state.currentRent} onChange={(e) => this.handleInput('currentRent', e)}></input>
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">Did your rent increase within the year (between March 15th and now)?</h5>
+                <SecondaryButton onClick={() => this.setState({showRentIncrease: true})}>Yes</SecondaryButton><SecondaryButton onClick={() => this.setState({showRentIncrease: false})}>No</SecondaryButton>
+                {this.state.showRentIncrease &&
+                  <section className="rent-increases">
+                    <ul>{rentIncreases}</ul>
+                    <SuccessButton className="add" onClick={this.addRentIncrease}>+</SuccessButton>
+                  </section>
+                }
+              </div>
+            </div>
+            <br />
+            <h4>Your rent increased by {rentIncreasePercentage}%. Your maximum rent is {maxRent} and you should be refunded ${refund}</h4>
+            <Disclaimer />
+            <br />
+            <br />
+            <PrimaryButton onClick={() => this.setState({showLetter: true})}>Generate a letter to your landlord</PrimaryButton>
+          </section>
+        }
+        {this.state.showLetter &&
+          <GenerateLetter/>
+        }
       </Layout>
     )
   }

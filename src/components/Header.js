@@ -6,10 +6,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { PrimaryButton, SecondaryButton } from '../components/Buttons'
 import i18n from '../i18n';
 import { withTranslation } from 'react-i18next';
-
+import logo from '../images/logo.svg'
 const Header = ({ siteTitle, t }) => (
   <header>
     <SEO title="Home" />
+    <Link to="/"><img src={logo}></img></Link>
     <Link to="/flowchart">
       <PrimaryButton>{t('eligible')}</PrimaryButton>
     </Link>

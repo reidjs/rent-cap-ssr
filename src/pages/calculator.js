@@ -2,8 +2,8 @@ import React from 'react'
 import Disclaimer from '../components/Disclaimer';
 import { PrimaryButton, SecondaryButton, SuccessButton, DangerButton } from '../components/Buttons'
 import { withTranslation } from 'react-i18next';
-import { handleInput } from '../helpers'
-import GenerateLetter from '../components/generateLetter';
+import { handleInput } from '../Helpers'
+import GenerateLetter from '../components/GenerateLetter';
 import withRedux from '../withRedux';
 import Layout from '../components/Layout'
 
@@ -63,7 +63,7 @@ class Calculator extends React.Component {
   }
   
   render() {
-    const { t, refund, changeRefund } = this.props
+    const { t, refund, changeRefund, zip } = this.props
     const maxRent = this.calculateMaxRent();
     const rentIncreasePercentage = this.calculateRentIncreasePercentage();
     const updateRefund = () => {
@@ -94,6 +94,7 @@ class Calculator extends React.Component {
     return (
       <Layout>
         <div>
+          refund {refund}
           <h1>{t('calculator-title')}</h1>
           <div className="card">
             <div className="card-body">
@@ -159,4 +160,4 @@ class Calculator extends React.Component {
   }
 }
 
-export default withRedux(withTranslation()(Calculator));
+export default withRedux(withTranslation()(Calculator))
